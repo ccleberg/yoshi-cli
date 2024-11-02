@@ -23,12 +23,12 @@ Usage:
     Run this script in your terminal to access these functions.
 """
 
-from account import Account
-import database
 from string import ascii_letters, punctuation, digits
 import random
 import uuid
 from prettytable import PrettyTable
+from account import Account
+import database
 
 
 def generate_characters(n: int) -> list:
@@ -78,7 +78,8 @@ def generate_passphrase(n: int, sep: str) -> str:
     phrases = []
     lucky_number = random.choice(range(0, n))
     for _ in range(n):
-        line = random.choice(open('wordlist.txt').readlines())
+        with open('wordlist.txt', 'r', encoding='utf-8') as file:
+            line = random.choice(file.readlines())
         line = line.replace('\n', '')
         if _ == lucky_number:
             phrases.append(line.strip().capitalize() + str(_))
@@ -102,17 +103,17 @@ def list_accounts() -> None:
     print(t)
 
 
-def delete_account(uuid: str) -> None:
+def delete_account(account_uuid: str) -> None:
     """
     Deletes an account by its UUID.
 
     Args:
-        uuid (str): The UUID of the account to delete
+        account_uuid (str): The UUID of the account to delete
 
     Returns:
         None
     """
-    account_record = database.find_account(uuid)
+    account_record = database.find_account(account_uuid)
     account = Account(account_record[0][0],
                                account_record[0][1],
                                account_record[0][2],
@@ -130,7 +131,8 @@ def purge_accounts() -> None:
         None
     """
     check = input(
-        'Are you absolutely sure you want to delete your password vault? This action is irreversible. (y/n): ')
+        '''Are you absolutely sure you want to delete your password vault?
+        This action is irreversible. (y/n): ''')
     if check.lower() == 'y':
         database.purge_table()
         database.purge_database()
@@ -174,7 +176,7 @@ def create_account() -> None:
         if password_length < 8:
             print('Error: Your password length must be at least 8 characters.')
             return
-        password_string = generate_password(password_length)
+        password_string = generate_password(password_length) # pylint: disable=undefined-variable
     else:
         password_string = input('Please enter your desired password: ')
 
@@ -185,16 +187,17 @@ def create_account() -> None:
 
 
 
-def edit_account(uuid: str, edit_parameter: int) -> None:
+def edit_account(account_uuid: str, edit_parameter: int) -> None:
     """
     Allow users to edit any account information except the UUID.
 
     Args:
-        uuid (str): Unique identifier of the account.
+        account_uuid (str): Unique identifier of the account.
         edit_parameter (int): Parameter indicating which field to edit.
             Valid values are 1 for application name, 2 for username,
             3 for password, and 4 for URL.
     """
+    field_name, new_value = ''
     if edit_parameter == 1:
         field_name = 'application'
         new_value = input('Please enter your desired Application name: ')
@@ -218,5 +221,5 @@ def edit_account(uuid: str, edit_parameter: int) -> None:
     elif edit_parameter == 4:
         field_name = 'url'
         new_value = input('Please enter your desired URL: ')
-    database.update_account(field_name, new_value, uuid)
+    database.update_account(field_name, new_value, account_uuid)
     print('Account successfully updated.')

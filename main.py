@@ -116,7 +116,7 @@ if __name__ == '__main__':
             else:
                 key = input('Please enter your encryption key: ')
         crypto.encrypt(key)
-    elif database.table_check():
+    elif database.check_table():
         if args.new:
             process.create_account()
         elif args.list:
