@@ -1,34 +1,41 @@
-# Import Python modules
+"""
+This module provides a basic interface for connecting to and interacting with a SQLite database.
+It includes functions for creating connections, executing queries, and retrieving results.
+"""
+
 import sqlite3
 import sys
 import os
 
-# Specify the name of the vault database
-vault_decrypted = 'vault.sqlite'
-vault_encrypted = 'vault.sqlite.aes'
+VAULT_DECRYPTED = 'vault.sqlite'
+VAULT_ENCRYPTED = 'vault.sqlite.aes'
 
 
-# Create the accounts table inside the vault database
 def create_table() -> None:
-    db_connection = sqlite3.connect(vault_decrypted)
+    """Create the accounts table within the vault database."""
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
     cursor.execute(
-        ''' CREATE TABLE accounts (uuid text, application text, username text, password text, url text) ''')
+        ''' CREATE TABLE IF NOT EXISTS accounts (uuid text, application text,
+            username text, password text, url text) '''
+    )
     db_connection.commit()
     db_connection.close()
 
 
-# Check if the account table exists within the database
-def table_check() -> bool:
+def check_table() -> bool:
+    """Check if the 'accounts' table exists within the vault database."""
     check = False
-    db_connection = sqlite3.connect(vault_decrypted)
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
     cursor.execute(
-        ''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='accounts' ''')
+        ''' SELECT count(name) FROM sqlite_master WHERE type='table'
+            AND name='accounts' '''
+    )
     if cursor.fetchone()[0] != 1:
         user_choice = input(
             'Password vault does not exist. Would you like to create it now? (y/n): ')
-        if user_choice == 'y' or user_choice == 'Y':
+        if user_choice.lower() == 'y':
             create_table()
             check = True
         else:
@@ -40,44 +47,48 @@ def table_check() -> bool:
     return check
 
 
-# Add a new account to the database
-def create_account(uuid: str, application: str, username: str, password: str,
+def add_account(uuid: str, application: str, username: str, password: str,
                    url: str) -> None:
-    db_connection = sqlite3.connect(vault_decrypted)
+    """Add a new account within the vault database."""
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
     cursor.execute(
-        ''' INSERT INTO accounts VALUES (:uuid,:application,:username,:password,:url) ''',
-        {'uuid': uuid, 'application': application, 'username': username,
-         'password': password, 'url': url})
+        ''' INSERT INTO accounts VALUES (:uuid,:application,:username,
+            :password,:url) ''', {
+            'uuid': uuid, 'application': application, 'username': username,
+            'password': password, 'url': url
+        }
+    )
     db_connection.commit()
     db_connection.close()
 
 
-# Delete an account with a specified UUID
 def delete_account(uuid: str) -> None:
-    db_connection = sqlite3.connect(vault_decrypted)
+    """Delete an account within the vault database by its unique ID."""
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
     cursor.execute(
-        ''' DELETE FROM accounts WHERE uuid = :uuid ''', {'uuid': uuid})
+        ''' DELETE FROM accounts WHERE uuid = :uuid ''', {'uuid': uuid}
+    )
     db_connection.commit()
     db_connection.close()
 
 
-# Find a specific account by UUID
 def find_account(uuid: str) -> list:
-    db_connection = sqlite3.connect(vault_decrypted)
+    """Find an account within the vault database by its unique ID."""
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
     cursor.execute(
-        ''' SELECT * FROM accounts WHERE uuid = :uuid ''', {'uuid': uuid})
+        ''' SELECT * FROM accounts WHERE uuid = :uuid ''', {'uuid': uuid}
+    )
     account = cursor.fetchall()
     db_connection.close()
     return account
 
 
-# Return all accounts found within the database table
-# The `accounts` variable is a list of tuples
 def find_accounts() -> list:
-    db_connection = sqlite3.connect(vault_decrypted)
+    """Return all accounts stored within the vault database."""
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
     cursor.execute(''' SELECT * FROM accounts ''')
     accounts = cursor.fetchall()
@@ -86,22 +97,23 @@ def find_accounts() -> list:
 
 
 def update_account(field_name: str, new_value: str, uuid: str) -> None:
+    """Update an account within the vault database by its unique ID."""
     queries = {
         'application': 'UPDATE accounts SET application = :new_value WHERE uuid = :uuid',
         'username': 'UPDATE accounts SET username = :new_value WHERE uuid = :uuid',
         'password': 'UPDATE accounts SET password = :new_value WHERE uuid = :uuid',
         'url': 'UPDATE accounts SET url = :new_value WHERE uuid = :uuid'
     }
-    db_connection = sqlite3.connect(vault_decrypted)
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
-    cursor.execute(queries[field_name],
-                   {'new_value': new_value, 'uuid': uuid})
+    cursor.execute(queries[field_name], {'new_value': new_value, 'uuid': uuid})
     db_connection.commit()
     db_connection.close()
 
 
 def purge_table() -> None:
-    db_connection = sqlite3.connect(vault_decrypted)
+    """Purge the 'accounts' table within the vault database."""
+    db_connection = sqlite3.connect(VAULT_DECRYPTED)
     cursor = db_connection.cursor()
     cursor.execute(''' DROP TABLE accounts ''')
     db_connection.commit()
@@ -109,4 +121,5 @@ def purge_table() -> None:
 
 
 def purge_database() -> None:
-    os.remove(vault_decrypted)
+    """Purge the entire vault database."""
+    os.remove(VAULT_DECRYPTED)

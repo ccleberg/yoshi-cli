@@ -1,7 +1,16 @@
+"""
+This script imports necessary modules for database interactions.
+
+Modules imported:
+    - database: A custom module providing database functionality.
+"""
+
 import database
 
 
 class Account:
+    """Represents a login account."""
+
     def __init__(self, uuid: str, application: str, username: str,
                  password: str, url: str) -> None:
         self.uuid = uuid
@@ -11,6 +20,7 @@ class Account:
         self.url = url
 
     def display_account(self) -> None:
+        """Print the account details."""
         print('ID:', self.uuid)
         print('Application:', self.application)
         print('Username:', self.username)
@@ -18,9 +28,15 @@ class Account:
         print('URL:', self.url)
 
     def save_account(self) -> None:
+        """Save the account details to the database."""
         database.create_account(
             self.uuid, self.application, self.username, self.password, self.url)
 
     def delete_account(self) -> bool:
+        """Delete the account from the database.
+
+        Returns:
+            bool: True if the deletion was successful.
+        """
         database.delete_account(self.uuid)
         return True

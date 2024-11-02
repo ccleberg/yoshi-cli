@@ -1,3 +1,9 @@
+"""
+This script uses argparse to parse command line arguments.
+
+It imports the required modules and sets up a parser with basic options for demonstration purposes.
+"""
+
 import argparse
 import crypto
 import database
@@ -5,47 +11,87 @@ import process
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='Manage your username and passwords via a convenient CLI vault.')
+        description='Manage your username and passwords via a convenient CLI vault.'
+    )
 
     # Top-level arguments
     group_one = parser.add_mutually_exclusive_group()
     group_one.add_argument(
-        '-n', '--new', help='Create a new account', action='store_true')
+        '-n', '--new',
+        help='Create a new account.',
+        action='store_true'
+    )
     group_one.add_argument(
-        '-l', '--list', help='List all saved accounts', action='store_true')
+        '-l', '--list',
+        help='List all saved accounts.',
+        action='store_true'
+    )
     group_one.add_argument(
-        '-e', '--edit', help='Edit a saved account', action='store_true')
+        '-e', '--edit',
+        help='Edit a saved account.',
+        action='store_true'
+    )
     group_one.add_argument(
-        '-d', '--delete', help='Delete a saved account', action='store_true')
+        '-d', '--delete',
+        help='Delete a saved account.',
+        action='store_true'
+    )
     group_one.add_argument(
-        '--purge', help='Purge all accounts and delete the vault',
-        action='store_true')
+        '--purge',
+        help=(
+            'Purge all accounts and delete the vault. '
+            '(Caution: this will irreversibly destroy your data.)'
+        ),
+        action='store_true'
+    )
     group_one.add_argument(
-        '--encrypt', help='Encrypt the vault', action='store_true')
+        '--encrypt',
+        help='Encrypt the vault.',
+        action='store_true'
+    )
     group_one.add_argument(
-        '--decrypt', help='Decrypt the vault', action='store_true')
+        '--decrypt',
+        help='Decrypt the vault.',
+        action='store_true'
+    )
 
     # Encryption flags
     group_two = parser.add_mutually_exclusive_group()
     group_two.add_argument(
         '-g', '--generate',
-        help='When using the --encrypt option, generate a new encryption key',
-        action='store_true')
+        help=(
+            'When using the --encrypt option, generate a new encryption key.'
+        ),
+        action='store_true'
+    )
     group_two.add_argument(
         '-k', '--keyfile',
-        help='When using the --encrypt or --decrypt options, specify an existing key file path',
-        action='store', nargs=1, type=str)
+        help='Path to existing key file.',
+        action='store',
+        nargs=1,
+        type=str
+    )
 
     # Edit flags
     group_three = parser.add_argument_group()
     group_three.add_argument(
         '-u', '--uuid',
-        help='When using the --edit or --delete options, provide the account UUID',
-        action='store', nargs=1, type=str)
+        help=(
+            'When using the --edit or --delete options, provide the account UUID.'
+        ),
+        action='store',
+        nargs=1,
+        type=str
+    )
     group_three.add_argument(
         '-f', '--field',
-        help='When using the --edit option, provide the field to edit',
-        action='store', nargs=1, type=int)
+        help=(
+            'When using the --edit option, specify the field to edit (integer index).'
+        ),
+        action='store',
+        nargs=1,
+        type=int
+    )
 
     args = parser.parse_args()
 
@@ -59,7 +105,9 @@ if __name__ == '__main__':
         if args.generate:
             key = crypto.generate_key()
             print(
-                'WRITE THIS KEY DOWN SOMEWHERE SAFE. YOU WILL NOT BE ABLE TO DECRYPT YOUR DATA WITHOUT IT!')
+                'WRITE THIS KEY DOWN SOMEWHERE SAFE. YOU WILL NOT BE ABLE TO DECRYPT '
+                'YOUR DATA WITHOUT IT!'
+            )
             print(key.decode())
             print('\n')
         else:
@@ -81,4 +129,5 @@ if __name__ == '__main__':
             process.purge_accounts()
         else:
             raise TypeError(
-                'Please specify a command or use the --help flag for more information.')
+                'Please specify a command or use the --help flag for more information.'
+            )
