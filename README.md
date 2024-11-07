@@ -21,21 +21,20 @@ information.
 
 [(Back to top)](#table-of-contents)
 
+## PyPi
+
+```bash
+pip install yoshi-cli
+```
+
+## Manual
+
 To run the script locally, run the following commands:
 
 ```bash
 git clone REPO_URL
-```
-
-```bash
 cd yoshi
-```
-
-```bash
 pip3 install -r requirements.txt
-```
-
-```bash
 python3 main.py --help
 ```
 
