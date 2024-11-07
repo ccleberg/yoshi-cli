@@ -5,11 +5,11 @@ It imports the required modules and sets up a parser with basic options for demo
 """
 
 import argparse
-import crypto
-import database
-import process
+import yoshi.crypto as crypto
+import yoshi.database as database
+import yoshi.process as process
 
-if __name__ == '__main__':
+def yoshi():
     parser = argparse.ArgumentParser(
         description='Manage your username and passwords via a convenient CLI vault.'
     )
@@ -131,3 +131,6 @@ if __name__ == '__main__':
             raise TypeError(
                 'Please specify a command or use the --help flag for more information.'
             )
+
+if __name__ == "__main__":
+    yoshi()

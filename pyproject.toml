@@ -1,6 +1,6 @@
 [project]
 name = "yoshi-cli"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="Christian Cleberg", email="hello@cleberg.net" },
 ]
@@ -16,3 +16,6 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/ccleberg/yoshi"
 Issues = "https://github.com/ccleberg/yoshi/issues"
+
+[project.scripts]
+yoshi = "yoshi.cli:yoshi"

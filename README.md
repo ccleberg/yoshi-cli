@@ -34,8 +34,7 @@ To run the script locally, run the following commands:
 ```bash
 git clone REPO_URL
 cd yoshi
-pip3 install -r requirements.txt
-python3 main.py --help
+pip install .
 ```
 
 # Usage
@@ -43,7 +42,7 @@ python3 main.py --help
 [(Back to top)](#table-of-contents)
 
 All commands can be passed to the program with the following template:  
-`python3 main.py <COMMAND> <FLAG> <PARAMETER>`
+`python3 src/yoshi/cli.py <COMMAND> <FLAG> <PARAMETER>`
 
 ![Yoshi CLI Help](./examples/yoshi-help.png)
 

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: yoshi-cli
-Version: 0.1.0
+Version: 0.1.1
 Summary: A password manager for the command line.
 Author-email: Christian Cleberg <hello@cleberg.net>
 Project-URL: Homepage, https://github.com/ccleberg/yoshi
@@ -35,22 +35,21 @@ information.
 
 [(Back to top)](#table-of-contents)
 
+## PyPi
+
+```bash
+pip install yoshi-cli
+```
+
+## Manual
+
 To run the script locally, run the following commands:
 
 ```bash
 git clone REPO_URL
-```
-
-```bash
 cd yoshi
-```
-
-```bash
 pip3 install -r requirements.txt
-```
-
-```bash
-python3 main.py --help
+python3 src/yoshi/cli.py --help
 ```
 
 # Usage
@@ -58,7 +57,7 @@ python3 main.py --help
 [(Back to top)](#table-of-contents)
 
 All commands can be passed to the program with the following template:  
-`python3 main.py <COMMAND> <FLAG> <PARAMETER>`
+`python3 src/yoshi/cli.py <COMMAND> <FLAG> <PARAMETER>`
 
 ![Yoshi CLI Help](./examples/yoshi-help.png)
 

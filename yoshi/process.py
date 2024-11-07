@@ -27,8 +27,8 @@ from string import ascii_letters, punctuation, digits
 import random
 import uuid
 from prettytable import PrettyTable
-from account import Account
-import database
+from yoshi.account import Account
+import yoshi.database as database
 
 
 def generate_characters(n: int) -> list:
@@ -176,7 +176,8 @@ def create_account() -> None:
         if password_length < 8:
             print('Error: Your password length must be at least 8 characters.')
             return
-        password_string = generate_password(password_length) # pylint: disable=undefined-variable
+        password_characters = generate_characters(password_length)
+        password_string = shuffle_characters(password_characters)
     else:
         password_string = input('Please enter your desired password: ')
 
