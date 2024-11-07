@@ -12,8 +12,7 @@ class Account:
     """Represents a login account."""
 
     def __init__(self, uuid: str, application: str, username: str,
-                 password: str, url: str) -> None:
-        self.self = self
+                 password: str, url: str) -> None: #pylint: R0913,R0917
         self.uuid = uuid
         self.application = application
         self.username = username
