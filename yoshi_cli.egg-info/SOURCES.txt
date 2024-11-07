@@ -1,6 +1,8 @@
 LICENSE
+MANIFEST.in
 README.md
 pyproject.toml
+wordlist.txt
 yoshi/__init__.py
 yoshi/__main__.py
 yoshi/account.py
