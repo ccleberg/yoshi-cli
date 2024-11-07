@@ -5,10 +5,7 @@ allows you to manage accounts and generate random passwords containing ASCII
 letters, numbers, and punctuation (min. 8 characters) or XKCD-like passphrases
 (min. 3 words).
 
-Please note that the script is written in Python 3 - you may need to run the
-script with the `python3` command instead of `python` if your system uses a
-default of Python 2. See the Installation & Usage sections below for more
-information.
+See the Installation & Usage sections below for more information.
 
 # Table of Contents
 
@@ -24,7 +21,7 @@ information.
 ## PyPi
 
 ```bash
-pip install yoshi-cli
+pipx install yoshi-cli
 ```
 
 ## Manual
@@ -33,8 +30,8 @@ To run the script locally, run the following commands:
 
 ```bash
 git clone REPO_URL
-cd yoshi
-pip install .
+cd yoshi-cli
+pipx install .
 ```
 
 # Usage
@@ -42,7 +39,7 @@ pip install .
 [(Back to top)](#table-of-contents)
 
 All commands can be passed to the program with the following template:  
-`python3 src/yoshi/cli.py <COMMAND> <FLAG> <PARAMETER>`
+`yoshi <COMMAND> <FLAG> <PARAMETER>`
 
 ![Yoshi CLI Help](./examples/yoshi-help.png)
 
@@ -60,42 +57,42 @@ All commands can be passed to the program with the following template:
   </thead>
   <tbody>
     <tr>
-      <td>help</td>
-      <td>h</td>
+      <td>--help</td>
+      <td>-h</td>
       <td>Print the welcome message</td>
     </tr>
     <tr>
-      <td>new</td>
-      <td>n</td>
+      <td>--new</td>
+      <td>-n</td>
       <td>Create a new account</td>
     </tr>
     <tr>
-      <td>list</td>
-      <td>l</td>
+      <td>--list</td>
+      <td>-l</td>
       <td>List all saved accounts</td>
     </tr>
     <tr>
-      <td>edit</td>
-      <td>e</td>
+      <td>--edit</td>
+      <td>-e</td>
       <td>Edit a saved account (see below for required flags)</td>
     </tr>
     <tr>
-      <td>delete</td>
-      <td>d</td>
+      <td>--delete</td>
+      <td>-d</td>
       <td>Delete a saved account (see below for required flags)</td>
     </tr>
     <tr>
-      <td>purge</td>
+      <td>--purge</td>
       <td>N/A</td>
       <td>Purge all accounts and delete the vault</td>
     </tr>
     <tr>
-      <td>encrypt</td>
+      <td>--encrypt</td>
       <td>N/A</td>
       <td>Encrypt the vault database (see below for required flags)</td>
     </tr>
     <tr>
-      <td>decrypt</td>
+      <td>--decrypt</td>
       <td>N/A</td>
       <td>Decrypt the vault database (see below for required flags)</td>
     </tr>
