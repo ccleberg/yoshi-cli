@@ -5,7 +5,7 @@ Modules imported:
     - database: A custom module providing database functionality.
 """
 
-import yoshi.database as database
+from yoshi import database
 
 
 class Account:

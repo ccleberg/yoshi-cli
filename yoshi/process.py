@@ -28,7 +28,7 @@ import random
 import uuid
 from prettytable import PrettyTable
 from yoshi.account import Account
-import yoshi.database as database
+from yoshi import database
 
 
 def generate_characters(n: int) -> list:

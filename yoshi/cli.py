@@ -5,11 +5,12 @@ It imports the required modules and sets up a parser with basic options for demo
 """
 
 import argparse
-import yoshi.crypto as crypto
-import yoshi.database as database
-import yoshi.process as process
+from yoshi import crypto, database, process
 
 def yoshi():
+    """
+    CLI entry point logic, used to parse user inputs.
+    """
     parser = argparse.ArgumentParser(
         description='Manage your username and passwords via a convenient CLI vault.'
     )
