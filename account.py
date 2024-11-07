@@ -11,7 +11,8 @@ import database
 class Account:
     """Represents a login account."""
 
-    def __init__(self, uuid: str, application: str, username: str,
+    def __init__(self, uuid: str, application: str, #pylint: disable=R0913,R0917
+                 username: str, #pylint: disable=R0913,R0917
                  password: str, url: str) -> None: #pylint: disable=R0913,R0917
         self.uuid = uuid
         self.application = application
