@@ -1,3 +1,7 @@
+"""
+A list of words to be used in XKCD-style passphrases.
+"""
+
 WORDLIST = [
     "abacus",
     "abdomen",
