@@ -34,6 +34,8 @@ cd yoshi-cli
 pipx install .
 ```
 
+![Yoshi CLI Installation](./examples/installation.png)
+
 # Usage
 
 [(Back to top)](#table-of-contents)
@@ -41,7 +43,7 @@ pipx install .
 All commands can be passed to the program with the following template:  
 `yoshi <COMMAND> <FLAG> <PARAMETER>`
 
-![Yoshi CLI Help](./examples/yoshi-help.png)
+![Yoshi CLI Help](./examples/help.png)
 
 ## Arguments
 
@@ -169,7 +171,7 @@ when encrypting, none are required when decrypting:
   </tbody>
 </table>
 
-![Yoshi CLI New Account](./examples/yoshi-example.png)
+![Yoshi CLI New Account](./examples/accounts.png)
 
 # Contributing
 
