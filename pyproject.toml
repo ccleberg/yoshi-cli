@@ -1,6 +1,6 @@
 [project]
 name = "yoshi-cli"
-version = "0.1.3"
+version = "0.1.4"
 authors = [
   { name="Christian Cleberg", email="hello@cleberg.net" },
 ]

@@ -29,7 +29,7 @@ import uuid
 from prettytable import PrettyTable
 from yoshi.account import Account
 from yoshi import database
-
+from yoshi.wordlist import WORDLIST
 
 def generate_characters(n: int) -> list:
     """
@@ -78,13 +78,11 @@ def generate_passphrase(n: int, sep: str) -> str:
     phrases = []
     lucky_number = random.choice(range(0, n))
     for _ in range(n):
-        with open('wordlist.txt', 'r', encoding='utf-8') as file:
-            line = random.choice(file.readlines())
-        line = line.replace('\n', '')
+        word = random.choice(WORDLIST)
         if _ == lucky_number:
-            phrases.append(line.strip().capitalize() + str(_))
+            phrases.append(word.capitalize() + str(_))
         else:
-            phrases.append(line.strip().capitalize())
+            phrases.append(word.capitalize())
     passphrase = sep.join(phrases)
     return passphrase
 
