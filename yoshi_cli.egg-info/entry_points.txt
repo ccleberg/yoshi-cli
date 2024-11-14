@@ -1,2 +1,0 @@
-[console_scripts]
-yoshi = yoshi.cli:yoshi
