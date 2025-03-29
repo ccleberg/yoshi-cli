@@ -1,8 +1,8 @@
 [project]
 name = "yoshi-cli"
-version = "0.1.7"
+version = "0.1.8"
 authors = [
-  { name="Christian Cleberg", email="hello@cleberg.net" },
+  { name="Christian Cleberg", email="hello@cmc.pub" },
 ]
 description = "A password manager for the command line."
 readme = "README.md"
