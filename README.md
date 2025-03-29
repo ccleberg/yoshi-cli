@@ -34,7 +34,7 @@ cd yoshi-cli
 pipx install .
 ```
 
-![Yoshi CLI Installation](./examples/installation.png)
+![Yoshi CLI Installation](https://github.com/ccleberg/yoshi-cli/blob/main/examples/installation.png?raw=true)
 
 # Usage
 
@@ -43,7 +43,7 @@ pipx install .
 All commands can be passed to the program with the following template:  
 `yoshi <COMMAND> <FLAG> <PARAMETER>`
 
-![Yoshi CLI Help](./examples/help.png)
+![Yoshi CLI Help](https://github.com/ccleberg/yoshi-cli/blob/main/examples/help.png?raw=true)
 
 ## Arguments
 
@@ -171,7 +171,7 @@ when encrypting, none are required when decrypting:
   </tbody>
 </table>
 
-![Yoshi CLI New Account](./examples/accounts.png)
+![Yoshi CLI New Account](https://github.com/ccleberg/yoshi-cli/blob/main/examples/accounts.png?raw=true)
 
 # Contributing
 
