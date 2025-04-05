@@ -25,6 +25,7 @@ Usage:
 
 from string import ascii_letters, punctuation, digits
 import random
+import secrets
 import uuid
 from prettytable import PrettyTable
 from yoshi.account import Account
@@ -45,7 +46,7 @@ def generate_characters(n: int) -> list:
     characters = []
     password_format = ascii_letters + punctuation + digits
     for _ in range(n):
-        characters.append(random.choice(password_format))
+        characters.append(secrets.choice(password_format))
     return characters
 
 
@@ -76,9 +77,9 @@ def generate_passphrase(n: int, sep: str) -> str:
         str: A string representation of the passphrase
     """
     phrases = []
-    lucky_number = random.choice(range(0, n))
+    lucky_number = secrets.choice(range(0, n))
     for _ in range(n):
-        word = random.choice(WORDLIST)
+        word = secrets.choice(WORDLIST)
         if _ == lucky_number:
             phrases.append(word.capitalize() + str(_))
         else:
